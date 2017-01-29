@@ -16,23 +16,53 @@ void jerry_srand(unsigned int seed)
 	abc=seed;
 }
 
-void init_array_rand(char shuzu[], int size) 
+int erjinzhi(int num)
+{
+	int i;
+	if(num>=0)
+	{
+		if(num!=0)
+			{
+				i=num%2;
+				erjinzhi(num/2);
+				cout<<i;
+			}
+	}
+	else
+	{
+		cout<<"-";
+		num=-num;
+		if(num!=0)
+                        {
+                                i=num%2;
+                                erjinzhi(num/2);
+                                cout<<i;
+                        }
+
+	}
+	return i;
+}
+
+void init_array_rand(char shuzu[], long long size) 
 {	
 	jerry_srand(0);
-	int k,ran_num;	
+	long long k;
+	int ran_num;	
 	for(k=0;k<size;k++)
 		{
 			ran_num=(jerry_rand()%(128-(-128)))-128;
 			shuzu[k]=ran_num;
+			erjinzhi(shuzu[k]);
+			cout<<" ";
 		}
 
 }
 
 
 
-void print_array(char shuzu[],int size)
+void print_array(char shuzu[],long long size)
 {
-	int j=0;
+	long long j=0;
 	// Print Array
 	 for(j=0;j<size;j++)
 		{
