@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>
 #include <ctime>
+#include <fstream>
 using namespace std;
 #define SIZE 1024
 
@@ -59,19 +60,20 @@ void init_array_rand(char shuzu[], long long size)
 }
 
 
-
-void print_array(char shuzu[],long long size)
+void print_array_to_file(char shuzu[],long long size)
 {
-	long long j=0;
-	// Print Array
-	 for(j=0;j<size;j++)
+	ofstream txtout("a.txt");
+	int i=0;
+	for(;i<SIZE;i++)
+	{
+		txtout<<setw(9)<<(int)shuzu[i]<<" ";
+		if((i+1)%8==0)
 		{
-			cout<<setw(9)<<(int)shuzu[j]<<" ";
-			if((j+1)%8==0)
-				{
-					cout<<endl;	
-				}	
+			txtout<<endl;
 		}
+	}
+	txtout<<endl;
+	txtout.close();
 }
 
 int main()
@@ -79,6 +81,6 @@ int main()
 	char shuzu[SIZE];
 	init_array_rand(shuzu,SIZE);
 
- 	print_array(shuzu,SIZE);
+ 	print_array_to_file(shuzu,SIZE);
 	return 0;			
 }
