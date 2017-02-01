@@ -17,48 +17,25 @@ void jerry_srand(unsigned int seed)
 	abc=seed;
 }
 
-int erjinzhi(int num)
-{
-	int i;
-	if(num>=0)
-	{
-		if(num!=0)
-			{
-				i=num%2;
-				erjinzhi(num/2);
-				cout<<i;
-			}
-	}
-	else
-	{
-		cout<<"-";
-		num=-num;
-		if(num!=0)
-                        {
-                                i=num%2;
-                                erjinzhi(num/2);
-                                cout<<i;
-                        }
-
-	}
-	return i;
-}
-
 void init_array_rand(char shuzu[], long long size) 
 {	
 	jerry_srand(0);
 	long long k;
-	int ran_num;	
+	int ran_num;
+		
 	for(k=0;k<size;k++)
 		{
 			ran_num=(jerry_rand()%(128-(-128)))-128;
 			shuzu[k]=ran_num;
-			erjinzhi(shuzu[k]);
-			cout<<" ";
 		}
-
 }
 
+void print_binary_file(char shuzu[],long long size)
+{
+	ofstream jerrybinout("a.bin",ios::out|ios::binary);
+	jerrybinout.write((char*)&shuzu[0],sizeof(char)*SIZE);
+        jerrybinout.close();
+}
 
 void print_array_to_file(char shuzu[],long long size)
 {
@@ -80,7 +57,7 @@ int main()
 {	
 	char shuzu[SIZE];
 	init_array_rand(shuzu,SIZE);
-
+	print_binary_file(shuzu,SIZE);
  	print_array_to_file(shuzu,SIZE);
 	return 0;			
 }
